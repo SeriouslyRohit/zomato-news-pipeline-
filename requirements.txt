@@ -1,2 +1,4 @@
 GoogleNews
 supabase
+newspaper3k
+
