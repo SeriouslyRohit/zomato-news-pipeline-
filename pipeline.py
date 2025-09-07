@@ -14,6 +14,7 @@ def fetch_zomato_news(limit=10):
             "source": r.get("media"),
             "date": r.get("date"),
             "link": r.get("link"),
+            "image_url": r.get("img")
         }
         for r in results[:limit]
     ]
