@@ -1,26 +1,12 @@
 from GoogleNews import GoogleNews
 from supabase import create_client
 import os
-from urllib.parse import urlparse, urlunparse, parse_qs
 
 def clean_link(link):
-    """
-    Cleans a GoogleNews link by removing tracking/query parameters 
-    and ensures a proper canonical URL.
-    """
     if not link or not link.startswith("http"):
         return None
-
-    parsed = urlparse(link)
-
-    # Rebuild URL with scheme, netloc, path only (drop query & fragment)
-    clean_url = urlunparse((parsed.scheme, parsed.netloc, parsed.path.rstrip('/'), '', '', ''))
-
-    # Ignore empty URLs after cleaning
-    if not parsed.netloc or not parsed.path:
-        return None
-
-    return clean_url
+    clean_url = link.split('&')[0]  # Remove Google tracking params
+    return clean_url.rstrip('/')
 
 def fetch_zomato_news(limit=10):
     googlenews = GoogleNews(lang="en")
@@ -30,7 +16,7 @@ def fetch_zomato_news(limit=10):
     news_list = []
     for r in results[:limit]:
         cleaned = clean_link(r.get("link"))
-        if cleaned:  # Only include valid cleaned URLs
+        if cleaned:
             news_list.append({
                 "title": r.get("title"),
                 "source": r.get("media"),
