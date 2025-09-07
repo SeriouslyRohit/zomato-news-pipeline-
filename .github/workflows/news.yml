@@ -2,8 +2,8 @@ name: Daily Zomato News Pipeline
 
 on:
   schedule:
-    # 06:43 CEST = 04:43 UTC
-    - cron: "43 4 * * *"
+    # 03:00 CEST 
+    - cron: "0 1 * * *"
   workflow_dispatch:
 
 jobs:
