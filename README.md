@@ -1,2 +1,2 @@
 # zomato-news-pipeline-
-Fetches news for Zomato from Google search, and uploads it on my supabase table news (scheduled for everyday)
+Fetches news concerning Zomato from Google search, and then uploads them on a news table in  supabase (scheduled everyday)
